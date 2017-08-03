@@ -1,11 +1,11 @@
-import { asyncRouterMap, constantRouterMap } from '@/router/index';
+import {asyncRouterMap, constantRouterMap} from '@/router/index';
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
  * @param roles
  * @param route
  */
-function hasPermission(roles, route) {
+function hasPermission (roles, route) {
   if (route.meta && route.meta.role) {
     return roles.some(role => route.meta.role.indexOf(role) >= 0)
   } else {
@@ -18,7 +18,7 @@ function hasPermission(roles, route) {
  * @param asyncRouterMap
  * @param roles
  */
-function filterAsyncRouter(asyncRouterMap, roles) {
+function filterAsyncRouter (asyncRouterMap, roles) {
   const accessedRouters = asyncRouterMap.filter(route => {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
@@ -43,15 +43,32 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({ commit }, data) {
+    GenerateRoutes ({commit}, data) {
       return new Promise(resolve => {
-        const { roles } = data
-        let accessedRouters
-        if (roles.indexOf('admin') >= 0) {
-          accessedRouters = asyncRouterMap
-        } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
-        }
+        //通过auth配路由
+        const {auth} = data
+        //过滤一级菜单
+        let accessedRouters = asyncRouterMap.filter(router => {
+          return auth.filter(item => {
+            return item.range === 1
+          }).find(item => {
+            return item.name === router.name
+          })
+        })
+        //一级菜单生成后过滤二级菜单
+        accessedRouters.forEach(router => {
+          if (router.children) {
+            router.children = router.children.filter(rout => {
+              return auth.filter(item => {
+                return item.range === 2
+              }).find(item => {
+                return item.name === rout.name
+              })
+            })
+          }
+        })
+
+
         commit('SET_ROUTERS', accessedRouters);
         resolve();
       })

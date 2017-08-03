@@ -28,7 +28,9 @@ router.beforeEach((to, from, next) => {
       if (store.getters.roles.length === 0) {
         store.dispatch('GetInfo').then(res => {
           const roles = res.data.role;
-          store.dispatch('GenerateRoutes', { roles }).then(() => {
+          //新增了auth
+          const auth = res.data.auth;
+          store.dispatch('GenerateRoutes', { auth }).then(() => {
             router.addRoutes(store.getters.addRouters);
             next({ ...to });
           })
