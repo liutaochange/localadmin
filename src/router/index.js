@@ -38,7 +38,15 @@ export const constantRouterMap = [
     name: 'Home',
     hidden: true,
     children: [{ path: 'dashboard', component: dashboard }]
-  }
+  },
+   {
+     path: '/introduction',
+     component: Layout,
+     redirect: '/introduction/index',
+     icon: 'xinrenzhinan',
+     noDropdown: true,
+     children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
+   }
 ]
 
 export default new Router({
@@ -52,10 +60,21 @@ export const asyncRouterMap = [
     path: '/example',
     component: Layout,
     redirect: 'noredirect',
-    name: 'Example',
+    name: '用户管理',
     icon: 'zujian',
     children: [
-      { path: 'index', component: Form, name: 'Form', icon: 'zonghe' }
+      { path: 'index', component: Form, name: '用户信息', icon: 'zonghe' },
+      { path: 'user', component: Form, name: '增加用户', icon: 'zonghe' }
+    ]
+  },
+  {
+    path: '/page',
+    component: Layout,
+    redirect: 'noredirect',
+    name: '系统设置',
+    icon: 'zonghe',
+    children: [
+      { path: 'form/create', icon: 'yinhangqia', component: _import('page/form'), name: '菜单设置' },
     ]
   },
 
@@ -63,10 +82,11 @@ export const asyncRouterMap = [
     path: '/table',
     component: Layout,
     redirect: '/table/index',
-    name: 'Table',
+    name: '综合实例',
     icon: 'tubiaoleixingzhengchang',
     noDropdown: true,
-    children: [{ path: 'index', component: Table, name: 'Table', meta: { role: ['admin'] } }]
+    children: [
+      { path: 'index', component: Table, name: '综合实例', meta: { role: ['admin'] } }]
   },
 
   { path: '*', redirect: '/404', hidden: true }
