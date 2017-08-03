@@ -19,6 +19,10 @@ const Err404 = _import('404');
 const Form = _import('page/form');
 const Table = _import('table/index');
 
+/*用户信息*/
+
+const UserInfo  = _import("usercontrol/userinfo");
+
 Vue.use(Router);
 
  /**
@@ -55,7 +59,7 @@ export const asyncRouterMap = [
     name: '用户管理',
     icon: 'zujian',
     children: [
-      { path: 'index', component: Form, name: '用户信息', icon: 'zonghe' },
+      { path: 'index', component: UserInfo, name: '用户信息', icon: 'zonghe' },
       { path: 'user', component: Form, name: '增加用户', icon: 'zonghe' }
     ]
   },

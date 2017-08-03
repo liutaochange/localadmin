@@ -70,3 +70,8 @@
     }
   }
 </script>
+<style scoped>
+  .app-container{
+    width: 500px !important;
+  }
+</style>
