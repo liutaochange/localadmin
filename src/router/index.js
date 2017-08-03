@@ -38,15 +38,7 @@ export const constantRouterMap = [
     name: 'Home',
     hidden: true,
     children: [{ path: 'dashboard', component: dashboard }]
-  },
-   {
-     path: '/introduction',
-     component: Layout,
-     redirect: '/introduction/index',
-     icon: 'xinrenzhinan',
-     noDropdown: true,
-     children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
-   }
+  }
 ]
 
 export default new Router({
