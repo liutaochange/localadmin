@@ -43,8 +43,8 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.user_id).then(response => {
           const data = response.data;
-         /* commit('SET_ROLES', data.role);
-          commit('SET_NAME', data.name);
+          commit('SET_ROLES', data.role_list);
+          /* commit('SET_NAME', data.name);
           commit('SET_AVATAR', data.avatar);*/
           //新增了auth
           let msg = {"msg":"成功","role_list":[{"action_id":1,"name":"用户管理","range":1},{"action_id":2,"name":"系统设置","range":1},{"action_id":3,"parent_id":1,"name":"用户信息","range":2},{

@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' });
     } else {
-      if (store.getters.roles.length === 0) {
+      if (store.getters.user_id.length === 0) {
         store.dispatch('GetInfo').then(res => {
           //const roles = res.data.role;
           //新增了auth
