@@ -28,7 +28,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(user_name, userInfo.password).then(response => {
           const data = response.data;
-          setToken(data.user_id);
+          // setToken(data.user_id);
           commit('SET_TOKEN', data.user_id);
           resolve();
         }).catch(error => {

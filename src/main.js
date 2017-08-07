@@ -21,11 +21,11 @@ Vue.component('icon-svg', IconSvg)
 const whiteList = ['/login'];
 router.beforeEach((to, from, next) => {
   NProgress.start();
-  if (getToken()) {
+  if (store.getters.user_id.length !== 0) {
     if (to.path === '/login') {
       next({ path: '/' });
     } else {
-      if (store.getters.user_id.length === 0) {
+      if (store.getters.addRouters.length === 0) {
         store.dispatch('GetInfo').then(res => {
           //const roles = res.data.role;
           //新增了auth
@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
-      next()
+      next();
     } else {
       next('/login');
       NProgress.done();
