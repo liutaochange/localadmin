@@ -1,11 +1,11 @@
 import fetch from '@/utils/fetch';
 
-export function login(email, password) {
+export function login(user_name, password) {
   return fetch({
-    url: '/user/login',
-    method: 'post',
+    url: '/login',
+    method: 'get',
     data: {
-      email,
+      user_name,
       password
     }
   });
@@ -13,7 +13,7 @@ export function login(email, password) {
 
 export function getInfo(token) {
   return fetch({
-    url: '/user/info',
+    url: '/getinfo',
     method: 'get',
     params: { token }
   });
