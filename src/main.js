@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
     } else {
       if (store.getters.roles.length === 0) {
         store.dispatch('GetInfo').then(res => {
-          const roles = res.data.role;
+          //const roles = res.data.role;
           //新增了auth
           const auth = res.data.auth;
           store.dispatch('GenerateRoutes', { auth }).then(() => {

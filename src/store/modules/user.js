@@ -31,8 +31,8 @@ const user = {
       return new Promise((resolve, reject) => {
         login(user_name, userInfo.password).then(response => {
           const data = response.data;
-          setToken(data.token);
-          commit('SET_TOKEN', data.token);
+          setToken(data.user_id);
+          commit('SET_TOKEN', data.user_id);
           resolve();
         }).catch(error => {
           reject(error);
@@ -46,9 +46,9 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data;
-          commit('SET_ROLES', data.role);
+         /* commit('SET_ROLES', data.role);
           commit('SET_NAME', data.name);
-          commit('SET_AVATAR', data.avatar);
+          commit('SET_AVATAR', data.avatar);*/
           //新增了auth
           let msg = {"msg":"成功","role_list":[{"action_id":1,"name":"用户管理","range":1},{"action_id":2,"name":"系统设置","range":1},{"action_id":3,"parent_id":1,"name":"用户信息","range":2},{
             "action_id": 4,
@@ -57,7 +57,6 @@ const user = {
             "range": 2
           }],"rsp":200};
           response.data.auth = msg.role_list;
-
           resolve(response);
         }).catch(error => {
           reject(error);

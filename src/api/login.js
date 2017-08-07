@@ -4,16 +4,16 @@ export function login(user_name, password) {
   return fetch({
     url: '/login',
     method: 'get',
-    data: {
-      user_name,
-      password
+    params: {
+      user_name:user_name,
+      password:password
     }
   });
 }
 
 export function getInfo(token) {
   return fetch({
-    url: '/getinfo',
+    url: 'role/queryRole',
     method: 'get',
     params: { token }
   });

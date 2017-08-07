@@ -3,5 +3,5 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  BASE_API: '"https://easy-mock.com/mock/5984329da1d30433d8537bca/example"',
+  BASE_API: '"http://123.56.20.183:1128/itable_tennis_statistics"',
 })
