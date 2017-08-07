@@ -3,15 +3,12 @@ import { getToken, setToken, removeToken } from '@/utils/auth';
 
 const user = {
   state: {
-    token: getToken(),
-    name: '',
-    avatar: '',
-    roles: []
+    user_id: ""
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
-      state.token = token;
+      state.user_id = token;
     },
     SET_NAME: (state, name) => {
       state.name = name;
@@ -44,7 +41,7 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
+        getInfo(state.user_id).then(response => {
           const data = response.data;
          /* commit('SET_ROLES', data.role);
           commit('SET_NAME', data.name);

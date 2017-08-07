@@ -11,11 +11,13 @@ export function login(user_name, password) {
   });
 }
 
-export function getInfo(token) {
+export function getInfo(user_id) {
   return fetch({
     url: 'role/queryRole',
     method: 'get',
-    params: { token }
+    params: {
+      user_id:user_id
+    }
   });
 }
 
