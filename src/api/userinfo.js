@@ -3,26 +3,11 @@
  */
 import fetch from '@/utils/fetch';
 
-export function userlist(username, state, ccpage, pagenum) {
+export function userlist(query) {
   return fetch({
-    url: '/user/userlist',
+    url: '/user/queryUserList',
     method: 'post',
-    params: {
-      username,
-      state,
-      ccpage,
-      pagenum
-    }
+    params: query
   });
 }
 
-
-export function getLists(username) {
-  return fetch({
-    url: '/proxy',
-    method: 'get',
-    params: {
-      username
-    }
-  });
-}

@@ -12,20 +12,22 @@ import 'normalize.css/normalize.css'
 import '@/assets/iconfont/iconfont'
 import IconSvg from '@/components/Icon-svg/index.vue'
 import { getToken } from '@/utils/auth'
+import vueWaves from './directive/waves';// 水波纹指令
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-Vue.component('icon-svg', IconSvg)
+Vue.component('icon-svg', IconSvg);
+Vue.use(vueWaves);
 
 const whiteList = ['/login'];
 router.beforeEach((to, from, next) => {
-  NProgress.start();
-  if (store.getters.user_id.length !== 0) {
+  NProgress.start(); // 开启Progress
+  if (getToken()) { // 判断是否有userid,是否登录
     if (to.path === '/login') {
       next({ path: '/' });
     } else {
-      if (store.getters.addRouters.length === 0) {
+      if (store.getters.addRouters.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetInfo').then(res => {
           //const roles = res.data.role;
           //新增了auth

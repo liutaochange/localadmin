@@ -28,7 +28,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(user_name, userInfo.password).then(response => {
           const data = response.data;
-          // setToken(data.user_id);
+          setToken(data.user_id);
           commit('SET_TOKEN', data.user_id);
           resolve();
         }).catch(error => {
@@ -41,11 +41,14 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
+        console.log(state.user_id);
         getInfo(state.user_id).then(response => {
           const data = response.data;
-          commit('SET_ROLES', data.role_list);
-          /* commit('SET_NAME', data.name);
-          commit('SET_AVATAR', data.avatar);*/
+          console.log(data);
+          /*commit('SET_ROLES', data.role_list);
+           commit('SET_NAME', data.name);*/
+           var  avatar = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
+          commit('SET_AVATAR', avatar);
           //新增了auth
           let msg = {"msg":"成功","role_list":[{"action_id":1,"name":"用户管理","range":1},{"action_id":2,"name":"系统设置","range":1},{"action_id":3,"parent_id":1,"name":"用户信息","range":2},{
             "action_id": 4,
