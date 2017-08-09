@@ -133,7 +133,6 @@
       getList() {
         this.listLoading = true;
         userlist(this.listQuery).then(response => {
-          console.log(JSON.stringify(response.data));
           this.list = response.data.array;
           this.total = response.data.total_count;
           this.total_page = response.data.total_page;

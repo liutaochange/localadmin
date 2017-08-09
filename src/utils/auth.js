@@ -10,7 +10,7 @@ export function setUserId(userId) {
   return sessionStorage.setItem(IdKey, userId)
 }
 
-export function removetUserId() {
-  return sessionStorage.remove(IdKey)
+export function removeUserId() {
+  return sessionStorage.removeItem(IdKey)
 }
 

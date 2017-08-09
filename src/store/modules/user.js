@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/login';
-import { getUserId, setUserId, removetUserId } from '@/utils/auth';
+import { getUserId, setUserId, removeUserId } from '@/utils/auth';
 
 const user = {
   state: {
@@ -31,11 +31,14 @@ const user = {
       return new Promise((resolve, reject) => {
         login(user_name, userInfo.password).then(response => {
           const data = response.data;
-          console.log(data)
-          setUserId(data.userId);
-          commit('SET_TOKEN', data.userId);
-          commit('SET_NAME', data.user_name);
-          resolve();
+          if(data.msg=="success"){
+            setUserId(data.userId);
+            commit('SET_TOKEN', data.userId);
+            commit('SET_NAME', data.user_name);
+            resolve();
+          }else {
+            reject(data.msg);
+          }
         }).catch(error => {
           reject(error);
         });
@@ -44,12 +47,11 @@ const user = {
 
 
     // 获取用户信息
-    GetInfo({ commit, state }) {
+    GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
-        console.log(state.user_id);
-        getInfo(state.user_id).then(response => {
+        const  user_id = getUserId();
+        getInfo(user_id).then(response => {
           const data = response.data;
-          console.log(data);
           var  avatar = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
           commit('SET_AVATAR', avatar);
           commit('SET_ROLES', data.role_list);
@@ -63,10 +65,10 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
+        logout().then(() => {
           commit('SET_TOKEN', '');
           commit('SET_ROLES', []);
-          removeToken();
+          removeUserId();
           resolve();
         }).catch(error => {
           reject(error);
@@ -78,7 +80,7 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '');
-        removeToken();
+        removetUserId();
         resolve();
       });
     }

@@ -33,7 +33,6 @@ router.beforeEach((to, from, next) => {
         store.dispatch('GetInfo').then(res => {
           //auth 为从后台获取的当前用户的权限
           const auth = res.data.role_list;
-          console.log(auth);
           store.dispatch('GenerateRoutes', { auth }).then(() => {
             router.addRoutes(store.getters.addRouters);
             next({ ...to });

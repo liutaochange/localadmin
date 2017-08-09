@@ -59,7 +59,7 @@ export const asyncRouterMap = [
     name: '用户管理',
     icon: 'zujian',
     children: [
-      { path: 'index', component: UserInfo, name: '用户信息', icon: 'zonghe' },
+      { path: 'index', component: UserInfo, name: '用户管理', icon: 'zonghe' },
       { path: 'user', component: Form, name: '增加用户', icon: 'zonghe' }
     ]
   },
@@ -70,7 +70,7 @@ export const asyncRouterMap = [
     name: '系统设置',
     icon: 'zonghe',
     children: [
-      { path: 'form/create', icon: 'yinhangqia', component: _import('page/form'), name: '菜单设置' },
+      { path: 'form/create', icon: 'yinhangqia', component: _import('page/form'), name: '菜单管理' },
     ]
   },
 

@@ -50,7 +50,7 @@ const permission = {
         //过滤一级菜单
         let accessedRouters = asyncRouterMap.filter(router => {
           return auth.filter(item => {
-            return item.range === 1
+            return item.action_range === 1
           }).find(item => {
             return item.name === router.name
           })
@@ -60,7 +60,7 @@ const permission = {
           if (router.children) {
             router.children = router.children.filter(rout => {
               return auth.filter(item => {
-                return item.range === 2
+                return item.action_range === 2
               }).find(item => {
                 return item.name === rout.name
               })
