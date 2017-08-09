@@ -2,9 +2,9 @@ import fetch from '@/utils/fetch';
 
 export function login(user_name, password) {
   return fetch({
-    url: '/login',
+    url: '/user/login',
     method: 'get',
-    params: {
+    data: {
       user_name:user_name,
       password:password
     }
@@ -13,9 +13,9 @@ export function login(user_name, password) {
 
 export function getInfo(user_id) {
   return fetch({
-    url: 'role/queryRole',
+    url: 'user/info',
     method: 'get',
-    params: {
+    data: {
       user_id:user_id
     }
   });
@@ -24,7 +24,7 @@ export function getInfo(user_id) {
 export function logout() {
   return fetch({
     url: '/user/logout',
-    method: 'post'
+    method: 'get'
   });
 }
 

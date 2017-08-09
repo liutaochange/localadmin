@@ -1,9 +1,12 @@
 import { login, logout, getInfo } from '@/api/login';
-import { getToken, setToken, removeToken } from '@/utils/auth';
+import { getUserId, setUserId, removetUserId } from '@/utils/auth';
 
 const user = {
   state: {
-    user_id: ""
+    user_id: "",
+    avatar: "",
+    name: "",
+    roles:[]
   },
 
   mutations: {
@@ -18,7 +21,7 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles;
-    }
+    },
   },
 
   actions: {
@@ -28,8 +31,10 @@ const user = {
       return new Promise((resolve, reject) => {
         login(user_name, userInfo.password).then(response => {
           const data = response.data;
-          setToken(data.user_id);
-          commit('SET_TOKEN', data.user_id);
+          console.log(data)
+          setUserId(data.userId);
+          commit('SET_TOKEN', data.userId);
+          commit('SET_NAME', data.user_name);
           resolve();
         }).catch(error => {
           reject(error);
@@ -45,18 +50,9 @@ const user = {
         getInfo(state.user_id).then(response => {
           const data = response.data;
           console.log(data);
-          /*commit('SET_ROLES', data.role_list);
-           commit('SET_NAME', data.name);*/
-           var  avatar = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
+          var  avatar = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
           commit('SET_AVATAR', avatar);
-          //新增了auth
-          let msg = {"msg":"成功","role_list":[{"action_id":1,"name":"用户管理","range":1},{"action_id":2,"name":"系统设置","range":1},{"action_id":3,"parent_id":1,"name":"用户信息","range":2},{
-            "action_id": 4,
-            "parent_id": 2,
-            "name": "菜单设置",
-            "range": 2
-          }],"rsp":200};
-          response.data.auth = msg.role_list;
+          commit('SET_ROLES', data.role_list);
           resolve(response);
         }).catch(error => {
           reject(error);

@@ -1,16 +1,16 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Admin-userId'
+const IdKey = 'Admin-userId'
 
-export function getToken() {
-  return Cookies.get(TokenKey)
+export function getUserId() {
+  return sessionStorage.getItem(IdKey)
 }
 
-export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+export function setUserId(userId) {
+  return sessionStorage.setItem(IdKey, userId)
 }
 
-export function removeToken() {
-  return Cookies.remove(TokenKey)
+export function removetUserId() {
+  return sessionStorage.remove(IdKey)
 }
 
