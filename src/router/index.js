@@ -30,7 +30,6 @@ Vue.use(Router);
   * hidden : if `hidden:true` will not show in the sidebar
   * redirect : if `redirect:noredirect` will not redirct in the levelbar
   * noDropdown : if `noDropdown:true` will not has submenu in the sidebar
-  * meta : `{ role: ['admin'] }`  will control the page role
   **/
 export const constantRouterMap = [
   { path: '/login', component: Login, hidden: true },
@@ -82,7 +81,7 @@ export const asyncRouterMap = [
     icon: 'tubiaoleixingzhengchang',
     noDropdown: true,
     children: [
-      { path: 'index', component: Table, name: '综合实例', meta: { role: ['admin'] } }]
+      { path: 'index', component: Table, name: '综合实例'}]
   },
 
   { path: '*', redirect: '/404', hidden: true }

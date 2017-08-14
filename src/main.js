@@ -13,7 +13,7 @@ import '@/assets/iconfont/iconfont'
 import IconSvg from '@/components/Icon-svg/index.vue'
 import { getUserId } from '@/utils/auth'
 import vueWaves from './directive/waves';// 水波纹指令
-import './mock/index.js'
+import './mock/index.js';  //部分数据使用mock.js进行模拟
 
 
 Vue.config.productionTip = false
